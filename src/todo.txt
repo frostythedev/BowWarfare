@@ -1,0 +1,8 @@
+SCOREBOARD:
+- Design scoreboard layout to show kills,deaths,etc
+
+GAMEMODES
+- Develop more gamemode's TDM, CTF etc for future
+
+SHOP
+- Developer a player shop so player's can buy new weapons like grenades etc

@@ -1,0 +1,11 @@
+storage:
+    mode: YML
+    yml:
+        arena-folder-name: 'arenas'
+        player-folder-name: 'players'
+    sql:
+        hostname: 'localhost'
+        database: 'test'
+        port: '3306'
+        username: 'root'
+        password: 'admin'

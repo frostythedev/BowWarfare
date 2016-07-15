@@ -1,0 +1,7 @@
+name: BowWarfare
+main: me.frostythedev.bowwarfare.BWPlugin
+version: 1.0.0-BETA
+author: frostythedev
+commands:
+  bowwarfare:
+    aliases: [bw]
