@@ -34,4 +34,5 @@ public class Config {
     public static int GAME_SCORED_REQUIRED_TO_WIN = config.getInt("game.score-required-to-win");
     public static boolean GAME_SAFE_SPAWN_ENABLED = config.getBoolean("game.safe-spawn.enabled");
     public static int GAME_SAFE_SPAWN_DISTANCE = config.getInt("game.safe-spawn.distance");
+    public static boolean GAME_SAVE_INVENTORY_ENABLED = config.getBoolean("game.save-inventory.enabled");
 }

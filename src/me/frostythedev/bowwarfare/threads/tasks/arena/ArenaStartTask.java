@@ -1,6 +1,7 @@
 package me.frostythedev.bowwarfare.threads.tasks.arena;
 
 import me.frostythedev.bowwarfare.BWPlugin;
+import me.frostythedev.bowwarfare.Config;
 import me.frostythedev.bowwarfare.arena.Arena;
 import me.frostythedev.bowwarfare.arena.enums.ArenaState;
 import me.frostythedev.bowwarfare.utils.Colors;
@@ -52,7 +53,9 @@ public class ArenaStartTask extends BukkitRunnable {
                     Colors.message(ps, "&bFree For All - Attack all enemies");
                     ps.teleport(arena.getRandomSpawn(true));
 
-                    //TODO Save inventory contents
+                   if(Config.GAME_SAVE_INVENTORY_ENABLED){
+                       BWPlugin.getInstance().getInventoryManager().saveInventory(ps);
+                   }
                     ps.getInventory().clear();
                     ps.getInventory().setArmorContents(null);
 

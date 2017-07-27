@@ -189,7 +189,10 @@ public class Arena {
             Colors.sendMessage(ps, "&cPlace: &6&l" + (getPlace(ps.getName()).isPresent() ? getPlace(ps.getName()).get().getPlacement() : "N/A"));
             ps.getInventory().clear();
             ps.getInventory().setArmorContents(null);
-            //TODO Restore inventory contents
+
+            if(Config.GAME_SAVE_INVENTORY_ENABLED){
+                BWPlugin.getInstance().getInventoryManager().restoreInventory(ps);
+            }
 
             if(BWPlugin.getInstance().getLobbyLocation() != null){
                 ps.teleport(BWPlugin.getInstance().getLobbyLocation());

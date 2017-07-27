@@ -6,6 +6,7 @@ import me.frostythedev.bowwarfare.arena.adaptor.ArenaAdaptor;
 import me.frostythedev.bowwarfare.arena.storage.ArenaSQLStorage;
 import me.frostythedev.bowwarfare.arena.storage.ArenaYMLStorage;
 import me.frostythedev.bowwarfare.cmds.BWCommand;
+import me.frostythedev.bowwarfare.inventory.InventoryManager;
 import me.frostythedev.bowwarfare.listeners.general.ClickListener;
 import me.frostythedev.bowwarfare.scoreboard.ScoreboardLib;
 import me.frostythedev.bowwarfare.shop.manager.ShopManager;
@@ -54,6 +55,7 @@ public class BWPlugin extends JavaPlugin {
     private RunnableManager runnableManager;
     private PerkManager perkManager;
     private ShopManager shopManager;
+    private InventoryManager inventoryManager;
 
     private PlayerArrowTask playerArrowTask;
     private UAVUpdateTask uavUpdateTask;
@@ -85,6 +87,7 @@ public class BWPlugin extends JavaPlugin {
         this.runnableManager = new RunnableManager(this);
         this.perkManager = new PerkManager(this);
         this.shopManager = new ShopManager(this);
+        this.inventoryManager = new InventoryManager();
 
         this.arenaManager.loadAllArenas();
 
@@ -166,6 +169,10 @@ public class BWPlugin extends JavaPlugin {
 
     public UAVUpdateTask getUavUpdateTask() {
         return uavUpdateTask;
+    }
+
+    public InventoryManager getInventoryManager() {
+        return inventoryManager;
     }
 
     public static BWPlugin getInstance() {
