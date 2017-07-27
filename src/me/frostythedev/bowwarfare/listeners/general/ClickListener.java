@@ -56,15 +56,14 @@ public class ClickListener implements Listener {
                                 public void run() {
                                     if (ticks == 0) {
                                         Effects.explode(item.getLocation(), 1.0f, false, false);
-                                        for (Entity en : item.getNearbyEntities(6, 6, 6)) {
-                                            if (en instanceof Player) {
-                                                Player p = (Player) en;
-                                                int distance = (int) item.getLocation().distance(p.getLocation());
-                                                int seconds = (7 - distance) * 20;
-                                                p.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, seconds, 0));
-                                                p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, seconds, 0));
-                                            }
-                                        }
+                                        item.getNearbyEntities(6, 6, 6).stream()
+                                                .filter(en -> en instanceof Player).forEach(en -> {
+                                            Player p = (Player) en;
+                                            int distance = (int) item.getLocation().distance(p.getLocation());
+                                            int seconds = (7 - distance) * 20;
+                                            p.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, seconds, 0));
+                                            p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, seconds, 0));
+                                        });
                                         this.cancel();
                                     } else {
                                         Effects.playEffect(item.getLocation(), Effect.PARTICLE_SMOKE);
@@ -87,15 +86,14 @@ public class ClickListener implements Listener {
                                 public void run() {
                                     if (ticks == 0) {
                                         Effects.explode(item.getLocation(), 2.0f, false, false);
-                                        for (Entity en : item.getNearbyEntities(6, 6, 6)) {
-                                            if (en instanceof Player) {
-                                                Player p = (Player) en;
-                                                int distance = (int) item.getLocation().distance(p.getLocation());
-                                                double damage = ((7 - distance) * 3.5);
-                                                EntityDamageByEntityEvent ede = new EntityDamageByEntityEvent(player, p, EntityDamageEvent.DamageCause.BLOCK_EXPLOSION, damage);
-                                                plugin.getServer().getPluginManager().callEvent(ede);
-                                            }
-                                        }
+                                        item.getNearbyEntities(6, 6, 6).stream()
+                                                .filter(en -> en instanceof Player).forEach(en -> {
+                                            Player p = (Player) en;
+                                            int distance = (int) item.getLocation().distance(p.getLocation());
+                                            double damage = ((7 - distance) * 3.5);
+                                            EntityDamageByEntityEvent ede = new EntityDamageByEntityEvent(player, p, EntityDamageEvent.DamageCause.BLOCK_EXPLOSION, damage);
+                                            plugin.getServer().getPluginManager().callEvent(ede);
+                                        });
                                         this.cancel();
                                     } else {
                                         Effects.playEffect(item.getLocation(), Effect.FIREWORKS_SPARK

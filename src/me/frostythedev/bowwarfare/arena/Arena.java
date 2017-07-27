@@ -1,8 +1,10 @@
 package me.frostythedev.bowwarfare.arena;
 
 import me.frostythedev.bowwarfare.BWPlugin;
+import me.frostythedev.bowwarfare.Config;
 import me.frostythedev.bowwarfare.arena.enums.ArenaState;
 import me.frostythedev.bowwarfare.arena.enums.Placement;
+import me.frostythedev.bowwarfare.scoreboard.ScoreboardAPI;
 import me.frostythedev.bowwarfare.utils.Colors;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -150,6 +152,11 @@ public class Arena {
 
     public void endGame() {
         setArenaState(ArenaState.ENDED);
+
+        for(Player ps : getPhysicalPlayers()){
+            ScoreboardAPI.getInstance().setScoreboard(ps, null);
+        }
+
         Object[] objects = getOrdered().keySet().toArray();
 
         if (objects.length >= 1) {
@@ -176,19 +183,20 @@ public class Arena {
         for (Player ps : getPhysicalPlayers()) {
 
             //TODO Fireworks
-
-            Colors.clearChat(ps, 5);
             Colors.sendMessage(ps, "(&e-------------------------------");
             Colors.sendMessage(ps, "&c&lYour Stats: ");
             Colors.sendMessage(ps, "&cKills: " + getScore(ps.getUniqueId()));
             Colors.sendMessage(ps, "&cPlace: &6&l" + (getPlace(ps.getName()).isPresent() ? getPlace(ps.getName()).get().getPlacement() : "N/A"));
             ps.getInventory().clear();
             ps.getInventory().setArmorContents(null);
+            //TODO Restore inventory contents
 
             if(BWPlugin.getInstance().getLobbyLocation() != null){
                 ps.teleport(BWPlugin.getInstance().getLobbyLocation());
             }
         }
+
+        reset();
     }
 
     public void setPlace(Placement place, String winner) {
@@ -205,9 +213,11 @@ public class Arena {
     }
 
     public void reset() {
+        setArenaState(ArenaState.RESTARTING);
         this.scores.clear();
         this.placements.clear();
         getPhysicalPlayers().forEach(this::removePlayer);
+        setArenaState(ArenaState.LOBBY);
     }
 
     public void broadcast(String message) {
@@ -223,7 +233,7 @@ public class Arena {
             for (Player ps : getPhysicalPlayers()) {
                 Location loc = spawnpoints.get(ThreadLocalRandom.current().nextInt(spawnpoints.size()));
                 if (safe) {
-                    if (loc.distance(ps.getLocation()) >= 10) {
+                    if (loc.distance(ps.getLocation()) >= Config.GAME_SAFE_SPAWN_DISTANCE) {
                         good = loc;
                     }
                     break;

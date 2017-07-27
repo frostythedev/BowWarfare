@@ -1,7 +1,7 @@
 package me.frostythedev.bowwarfare.utils;
 
 import com.google.common.collect.Lists;
-import me.frostythedev.bowwarfare.utils.commands.ChatColor;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.DyeColor;
 import org.bukkit.FireworkEffect;

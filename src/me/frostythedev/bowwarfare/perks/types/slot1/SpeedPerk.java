@@ -1,5 +1,6 @@
 package me.frostythedev.bowwarfare.perks.types.slot1;
 
+import me.frostythedev.bowwarfare.Config;
 import me.frostythedev.bowwarfare.perks.Perk;
 import me.frostythedev.bowwarfare.perks.enums.PerkSlot;
 import me.frostythedev.bowwarfare.utils.Colors;
@@ -18,7 +19,7 @@ import java.util.List;
 public class SpeedPerk extends Perk {
 
     public SpeedPerk() {
-        super("Scout", new ItemStack(Material.FEATHER), null, PerkSlot.ONE, 250, 3);
+        super("Scout", new ItemStack(Material.FEATHER), null, PerkSlot.ONE, Config.SCOUT_PERK_COST, 3);
 
         List<String> desc = new ArrayList<>();
         desc.add(Colors.toColors("&7After taking pleasure in the death of"));

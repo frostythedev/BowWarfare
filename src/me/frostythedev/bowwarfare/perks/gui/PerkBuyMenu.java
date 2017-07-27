@@ -19,7 +19,7 @@ import org.bukkit.inventory.ItemStack;
 public class PerkBuyMenu extends GUIMenu {
 
     public PerkBuyMenu(BWPlugin plugin, Player player, Perk perk) {
-        super(Colors.toColors("&e" + perk.getName() + " Perk"), 2);
+        super(Colors.toColors("&e" + perk.getName() + " Perk"), 3);
 
         MenuComponent mc = new MenuComponent(4);
         setItem(player, perk.getFinalIcon(false), mc);

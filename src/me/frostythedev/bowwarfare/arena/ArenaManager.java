@@ -6,17 +6,10 @@ import me.frostythedev.bowwarfare.arena.storage.ArenaSQLStorage;
 import me.frostythedev.bowwarfare.callbacks.ArenaGatherCallback;
 import me.frostythedev.bowwarfare.enums.StorageType;
 import me.frostythedev.bowwarfare.storage.mysql.Database;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.craftbukkit.Main;
 import org.bukkit.entity.Player;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.ParseException;
 
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.*;
 
 /**
@@ -32,14 +25,14 @@ public class ArenaManager {
         this.loadedArenas = new HashMap<>();
     }
 
-    public Set<String> getArenaNames(){
+    public Set<String> getArenaNames() {
         return loadedArenas.keySet();
     }
 
-    public Set<Arena> getAvailableArenas(){
+    public Set<Arena> getAvailableArenas() {
         Set<Arena> arenas = new HashSet<>();
-        for(Arena arena : loadedArenas.values()){
-            if(arena.getArenaState().equals(ArenaState.LOBBY)){
+        for (Arena arena : loadedArenas.values()) {
+            if (arena.getArenaState().equals(ArenaState.LOBBY)) {
                 arenas.add(arena);
             }
         }
@@ -102,17 +95,17 @@ public class ArenaManager {
         return false;
     }
 
-    public AddResult addSpawn(Arena arena, Location location) {
+    public boolean addSpawn(Arena arena, Location location) {
         if (arena.getSpawnpoints().contains(location)) {
-            return AddResult.ALREADY_ADDED;
+            return false;
         } else {
             arena.getSpawnpoints().add(location);
-            if (arena.getSpawnpoints().size() >= arena.getMaxPlayers()) {
-                return AddResult.EXCEEDED;
-            } else {
-                return AddResult.INSUFFICIENT;
-            }
+            return true;
         }
+    }
+
+    public boolean removeSpawn(Arena arena, Location location) {
+        return arena.getSpawnpoints().contains(location) && arena.getSpawnpoints().remove(location);
     }
 
     public Arena getArena(String name) {
@@ -122,9 +115,9 @@ public class ArenaManager {
         return null;
     }
 
-    public Arena getArena(Player player){
-        for(Arena arena : loadedArenas.values()){
-            if(arena.contains(player)){
+    public Arena getArena(Player player) {
+        for (Arena arena : loadedArenas.values()) {
+            if (arena.contains(player)) {
                 return arena;
             }
         }

@@ -1,6 +1,7 @@
 package me.frostythedev.bowwarfare.players.storage;
 
 import me.frostythedev.bowwarfare.BWPlugin;
+import me.frostythedev.bowwarfare.Config;
 import me.frostythedev.bowwarfare.Files;
 import me.frostythedev.bowwarfare.enums.StorageType;
 import me.frostythedev.bowwarfare.players.BWPlayer;
@@ -24,7 +25,7 @@ public class PlayerYMLStorage extends DataStorage<BWPlayer>{
 
     @Override
     public void initialize() {
-        this.dataFolder = new File(plugin.getDataFolder() + File.separator + plugin.getConfig().getString("storage.yml.player-folder-name"));
+        this.dataFolder = new File(plugin.getDataFolder() + File.separator + Config.PLAYER_YML_FOLDER);
         if (!this.dataFolder.exists()) {
             this.dataFolder.mkdir();
         }

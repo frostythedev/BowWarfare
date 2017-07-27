@@ -1,6 +1,7 @@
 package me.frostythedev.bowwarfare.listeners.game;
 
 import me.frostythedev.bowwarfare.BWPlugin;
+import me.frostythedev.bowwarfare.Config;
 import me.frostythedev.bowwarfare.arena.enums.ArenaState;
 import me.frostythedev.bowwarfare.players.BWPlayer;
 import me.frostythedev.bowwarfare.utils.Colors;
@@ -67,7 +68,7 @@ public class DeathListener implements Listener {
     public void onRespawn(PlayerRespawnEvent event) {
         plugin.isInGame(event.getPlayer()).ifPresent(arena -> {
            if(arena.getArenaState().equals(ArenaState.IN_GAME)){
-               event.setRespawnLocation(arena.getRandomSpawn(true));
+               event.setRespawnLocation(arena.getRandomSpawn(Config.GAME_SAFE_SPAWN_ENABLED));
                event.getPlayer().getInventory().setItem(0, new ItemStack(Material.BOW));
            }
         });

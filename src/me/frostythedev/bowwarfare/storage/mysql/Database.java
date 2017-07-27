@@ -1,6 +1,7 @@
 package me.frostythedev.bowwarfare.storage.mysql;
 
 import me.frostythedev.bowwarfare.BWPlugin;
+import me.frostythedev.bowwarfare.Config;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.sql.*;
@@ -11,9 +12,9 @@ import java.util.logging.Level;
  */
 public class Database {
 
-    final String username="hive_admin"; //Enter in your db username
-    final String password="Homeworks1"; //Enter your password for the db
-    final String url = "jdbc:mysql://db4free.net:3306/hive_test"; //Enter URL w/db name
+    final String username= Config.MYSQL_USERNAME; //Enter in your db username
+    final String password=Config.MYSQL_PASSWORD; //Enter your password for the db
+    final String url = "jdbc:mysql://" + Config.MYSQL_HOSTNAME + ":" + Config.MYSQL_PORT + "/" + Config.MYSQL_DATABASE; //Enter URL w/db name
 
     private Connection connection;
 

@@ -5,9 +5,10 @@ import me.frostythedev.bowwarfare.arena.ArenaManager;
 import me.frostythedev.bowwarfare.arena.adaptor.ArenaAdaptor;
 import me.frostythedev.bowwarfare.arena.storage.ArenaSQLStorage;
 import me.frostythedev.bowwarfare.arena.storage.ArenaYMLStorage;
-import me.frostythedev.bowwarfare.commands.BWCommand;
+import me.frostythedev.bowwarfare.cmds.BWCommand;
 import me.frostythedev.bowwarfare.listeners.general.ClickListener;
-import me.frostythedev.bowwarfare.shop.ShopManager;
+import me.frostythedev.bowwarfare.scoreboard.ScoreboardLib;
+import me.frostythedev.bowwarfare.shop.manager.ShopManager;
 import me.frostythedev.bowwarfare.utils.Locations;
 import me.frostythedev.bowwarfare.utils.gui.MenuListener;
 import me.frostythedev.bowwarfare.listeners.game.DeathListener;
@@ -25,17 +26,12 @@ import me.frostythedev.bowwarfare.players.storage.PlayerSQLStorage;
 import me.frostythedev.bowwarfare.players.storage.PlayerYMLStorage;
 import me.frostythedev.bowwarfare.storage.core.DataStorage;
 import me.frostythedev.bowwarfare.threads.RunnableManager;
-import me.frostythedev.bowwarfare.threads.tasks.ArenaQueryTask;
-import me.frostythedev.bowwarfare.threads.tasks.PlayerArrowTask;
+import me.frostythedev.bowwarfare.threads.tasks.arena.ArenaQueryTask;
+import me.frostythedev.bowwarfare.threads.tasks.perks.PlayerArrowTask;
 import me.frostythedev.bowwarfare.threads.tasks.SignUpdateTask;
-import me.frostythedev.bowwarfare.threads.tasks.UAVUpdateTask;
-import me.frostythedev.bowwarfare.utils.commands.*;
+import me.frostythedev.bowwarfare.threads.tasks.perks.UAVUpdateTask;
 import me.frostythedev.bowwarfare.utils.json.JsonManager;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -62,8 +58,6 @@ public class BWPlugin extends JavaPlugin {
     private PlayerArrowTask playerArrowTask;
     private UAVUpdateTask uavUpdateTask;
 
-    private CommandsManager<CommandSender> commands;
-
     @Override
     public void onEnable() {
         instance = this;
@@ -75,7 +69,7 @@ public class BWPlugin extends JavaPlugin {
         JsonManager.getInstance().register(Arena.class, new ArenaAdaptor());
         JsonManager.getInstance().register(BWPlayer.class, new BWPlayerAdaptor(this));
 
-        if (getConfig().getString("storage.mode").equalsIgnoreCase("sql")) {
+        if (Config.STORAGE_MODE.equalsIgnoreCase("sql")) {
             this.arenaDataStorage = new ArenaSQLStorage();
             this.playerDataStorage = new PlayerSQLStorage();
         } else {
@@ -93,11 +87,18 @@ public class BWPlugin extends JavaPlugin {
         this.shopManager = new ShopManager(this);
 
         this.arenaManager.loadAllArenas();
-        this.perkManager.register(new SpeedPerk());
-        this.perkManager.register(new UAVPerk(this));
 
-        new BWCommand(this);
-        setupCommands();
+       if(Config.PERKS_ENABLED){
+           if(Config.SCOUT_PERK_ENABLED){
+               this.perkManager.register(new SpeedPerk());
+           }
+           if(Config.UAV_PERK_ENABLED){
+               this.perkManager.register(new UAVPerk(this));
+               uavUpdateTask = new UAVUpdateTask(this);
+           }
+       }
+
+        this.getServer().getPluginCommand("bowwarfare").setExecutor(new BWCommand(this));
 
         this.getServer().getPluginManager().registerEvents(new MenuListener(), this);
         this.getServer().getPluginManager().registerEvents(new ClickListener(this), this);
@@ -111,7 +112,8 @@ public class BWPlugin extends JavaPlugin {
         new ArenaQueryTask(this);
 
         playerArrowTask = new PlayerArrowTask(this);
-        uavUpdateTask = new UAVUpdateTask(this);
+
+        ScoreboardLib.setPluginInstance(this);
     }
 
     @Override
@@ -124,41 +126,6 @@ public class BWPlugin extends JavaPlugin {
             return Optional.of(getArenaManager().getArena(player));
         }
         return Optional.empty();
-    }
-
-    public void setupCommands() {
-        this.commands = new CommandsManager<CommandSender>() {
-            @Override
-            public boolean hasPermission(CommandSender sender, String perm) {
-                return sender instanceof ConsoleCommandSender || sender.hasPermission(perm);
-            }
-        };
-        CommandsManagerRegistration cmdRegister = new CommandsManagerRegistration(this, this.commands);
-        cmdRegister.register(BWCommand.class);
-    }
-
-    public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-        try {
-            this.commands.execute(cmd.getName(), args, sender, sender);
-        } catch (CommandPermissionsException e) {
-            sender.sendMessage(ChatColor.RED + "You don't have permission.");
-        } catch (MissingNestedCommandException e) {
-            sender.sendMessage(ChatColor.RED + e.getUsage());
-        } catch (CommandUsageException e) {
-            sender.sendMessage(ChatColor.RED + e.getMessage());
-            sender.sendMessage(ChatColor.RED + e.getUsage());
-        } catch (WrappedCommandException e) {
-            if (e.getCause() instanceof NumberFormatException) {
-                sender.sendMessage(ChatColor.RED + "Number expected, string received instead.");
-            } else {
-                sender.sendMessage(ChatColor.RED + "An error has occurred. See console.");
-                e.printStackTrace();
-            }
-        } catch (CommandException e) {
-            sender.sendMessage(ChatColor.RED + e.getMessage());
-        }
-
-        return true;
     }
 
     public Location getLobbyLocation() {

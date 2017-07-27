@@ -1,6 +1,7 @@
 package me.frostythedev.bowwarfare.arena.storage;
 
 import me.frostythedev.bowwarfare.BWPlugin;
+import me.frostythedev.bowwarfare.Config;
 import me.frostythedev.bowwarfare.Files;
 import me.frostythedev.bowwarfare.arena.Arena;
 import me.frostythedev.bowwarfare.enums.StorageType;
@@ -24,7 +25,7 @@ public class ArenaYMLStorage extends DataStorage<Arena> {
 
     @Override
     public void initialize() {
-        this.dataFolder = new File(plugin.getDataFolder() + File.separator + plugin.getConfig().getString("storage.yml.arena-folder-name"));
+        this.dataFolder = new File(plugin.getDataFolder() + File.separator + Config.ARENA_YML_FOLDER);
         if (!this.dataFolder.exists()) {
             this.dataFolder.mkdir();
         }

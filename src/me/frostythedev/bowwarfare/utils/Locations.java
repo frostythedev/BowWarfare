@@ -59,7 +59,58 @@ public class Locations {
         return playerInRadius;
     }
 
+    public static Player getNearestPlayer(Player entity, double radius){
+        Player near = null;
+        int nearest = 9999;
+        for(Entity en : entity.getNearbyEntities(radius, radius, radius)){
+           if(en instanceof Player){
+               if(en.getLocation().distance(entity.getLocation()) < nearest){
+                   near = (Player) en;
+                   nearest = (int) en.getLocation().distance(entity.getLocation());
+               }
+           }
+        }
+        if(isPlayerInRadius(entity.getLocation(), radius, near)){
+            return near;
+        }
+        return null;
+    }
+
+    public static Player getNearestPlayer(Player entity, double radius, Collection<UUID> exempt){
+        Player near = null;
+        int nearest = 9999;
+        for(Entity en : entity.getNearbyEntities(radius, radius, radius)){
+            if(en instanceof Player){
+                if(!exempt.contains(en.getUniqueId())){
+                    if(en.getLocation().distance(entity.getLocation()) < nearest){
+                        near = (Player) en;
+                        nearest = (int) en.getLocation().distance(entity.getLocation());
+                    }
+                }
+            }
+        }
+        if(isPlayerInRadius(entity.getLocation(), radius, near)){
+            return near;
+        }
+        return null;
+    }
+
     public static Entity getNearestEntity(Entity entity , double radius){
+        Entity near = null;
+        int nearest = 9999;
+        for(Entity en : entity.getNearbyEntities(radius, radius, radius)){
+            if(en.getLocation().distance(entity.getLocation()) < nearest){
+                near = en;
+                nearest = (int) en.getLocation().distance(entity.getLocation());
+            }
+        }
+        if(isEntityInRadius(entity.getLocation(), radius, near)){
+            return near;
+        }
+        return null;
+    }
+
+    public static Entity getNearestEntity(Entity entity , double radius, Set<UUID> execpt){
         Entity near = null;
         int nearest = 9999;
         for(Entity en : entity.getNearbyEntities(radius, radius, radius)){

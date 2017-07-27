@@ -1,6 +1,7 @@
 package me.frostythedev.bowwarfare.perks.types.slot1;
 
 import me.frostythedev.bowwarfare.BWPlugin;
+import me.frostythedev.bowwarfare.Config;
 import me.frostythedev.bowwarfare.perks.Perk;
 import me.frostythedev.bowwarfare.perks.enums.PerkSlot;
 import me.frostythedev.bowwarfare.utils.Colors;
@@ -23,7 +24,7 @@ public class UAVPerk extends Perk {
     private BWPlugin plugin;
 
     public UAVPerk(BWPlugin plugin) {
-        super("UAV", new ItemStack(Material.COMPASS), null, PerkSlot.ONE, 250, 3);
+        super("UAV", new ItemStack(Material.COMPASS), null, PerkSlot.ONE, Config.UAV_PERK_COST, 3);
         this.plugin = plugin;
 
         List<String> desc = new ArrayList<>();
@@ -41,7 +42,7 @@ public class UAVPerk extends Perk {
 
     @Override
     public void activate(Player player) {
-        player.getInventory().setItem(8, new ItemStackBuilder(new ItemStack(Material.COMPASS))
+        player.getInventory().setItem(6, new ItemStackBuilder(new ItemStack(Material.COMPASS))
                 .setDisplayName(Colors.toColors("&a&lUAV TRACKER"))
                 .setLore(Colors.toColors("&eTime Left: &730"))
                 .getItemStack());

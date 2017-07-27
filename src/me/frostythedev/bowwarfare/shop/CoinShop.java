@@ -1,6 +1,7 @@
 package me.frostythedev.bowwarfare.shop;
 
 import me.frostythedev.bowwarfare.BWPlugin;
+import me.frostythedev.bowwarfare.shop.gui.components.CoinComponent;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;

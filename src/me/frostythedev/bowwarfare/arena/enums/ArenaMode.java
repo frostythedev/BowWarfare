@@ -5,6 +5,5 @@ package me.frostythedev.bowwarfare.arena.enums;
  */
 public enum  ArenaMode {
     FFA,
-    TDM,
-    CTF
+    ;
 }
