@@ -1,0 +1,8 @@
+UPDATES:
+21/6/17
+- Reworked commands to use different system
+
+27/7/17
+- Redid all code to now include the config (Config.class)
+- Added option for support for inventory saving/loading
+- Added option for fireworks on win

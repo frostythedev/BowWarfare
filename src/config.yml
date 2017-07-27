@@ -1,11 +1,114 @@
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
+# BowWarfare v1.0.0 - REMASTERED
+# by frostythedev
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
+#  GLOBAL SETTINGS
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
+
+# Basic global variables that should not be changed unless
+# specifically requested to. Advance at your own risk
+# No support will be given for manually changing anything in this
+# section.
+
+debug: false
+lobby-location: world;1539.3316314889903;80.0;-990.532307336864;-1.3499961;-308.2992
+
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
+#  STORAGE SETTINGS
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
+
+# Here you'll configure your preferred storage method
+# Currently the plugin only supports YML and MySQL storage types
+# More will be added in the future if requested
+
 storage:
+# Distinguish between storage types either YML or SQL so the plugin can
+# get any requried files / tables to be made or recreated
+# WARNING: If changing please close your server and start it back up to
+# ensure everything is working properly
     mode: YML
     yml:
+# If you'd like to define different folders within the plugin's folder
+# to store data you can do so here, leaving it just as it is, is recommended
         arena-folder-name: 'arenas'
         player-folder-name: 'players'
+# If you choose to use the SQL backend you have to configure your
+# database settings here for easy and future data storage
     sql:
         hostname: 'localhost'
         database: 'test'
         port: '3306'
         username: 'root'
         password: 'admin'
+# This is a backup function which currently have NO purpose in the plugin
+# It is a planned feature in development and will be used as a backup
+# if one of the backends fail to respond or work in the future
+# All data will be moved to the backend specified below so that there is no data loss
+# and you can have your problem sorted out
+# WARNING: CURRENTLY EXPERIMENTAL {DO NOT USE}
+    backup:
+      enable: false
+      mode: SQL
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
+#  MENU SETTINGS
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
+
+# Here you'll configure your all menu
+# specifications and settings which can be disabled or enabled
+# More will be added in the future if requested
+
+# Should perks be enabled or disabled in your server
+perks:
+  enabled: true
+
+# Should the built in item shop be enabled or disabled in your server
+item-shop:
+  enabled: true
+
+# Here should list any and all shops that you have created in the
+# /shops directory. This will manage all your shops which you can enable and disable
+# at will. Access these shops with /bw shop [shop_name] in-game.
+# NOTICE: CURRENTLY NOT IN USE FOR FUTURE DEVELOPEMENT
+custom-shops:
+  example-shop:
+    enabled: true
+  discount-shop:
+    enabled: true
+  vip-shop:
+    enabled: true
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
+#  PERK SETTINGS
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
+
+# Here you can individually enabled or disable perks to your liking
+# and set the cost for each perk.
+# More settings will continuously be thought of and more perks would be added
+
+scout-perk:
+  enabled: true
+  cost: 250
+
+uav-perk:
+  enabled: true
+  cost: 250
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
+#  GAME SETTINGS
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
+
+# Here is where all general game settings can be configured. Currently
+# there are no specific arena-settings.
+game:
+  max-time: 600
+  score-required-to-win: 25
+  safe-spawn:
+    enabled: true
+    distance: 10
+  save-inventory:
+    enabled: true
+  fireworks-on-win: true

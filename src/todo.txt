@@ -1,8 +1,16 @@
+GENERAL:
+- Connect config to game mechanics - DOING
+
 SCOREBOARD:
-- Design scoreboard layout to show kills,deaths,etc
+- Design scoreboard layout to show kills,deaths,etc - DONE
 
 GAMEMODES
-- Develop more gamemode's TDM, CTF etc for future
+- Develop more gamemode's TDM, CTF etc for future - POSTPONED
 
 SHOP
-- Developer a player shop so player's can buy new weapons like grenades etc
+- Developer a player shop so player's can buy new weapons like grenades etc - POSTPONED
+
+INVENTORY
+- Saving contents before game starts - DONE
+- Restoring contents after game ends - DONE
+- Making configuration toggle for this - DONE

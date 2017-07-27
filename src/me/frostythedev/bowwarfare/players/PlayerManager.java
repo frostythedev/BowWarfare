@@ -2,6 +2,7 @@ package me.frostythedev.bowwarfare.players;
 
 import me.frostythedev.bowwarfare.BWPlugin;
 import me.frostythedev.bowwarfare.utils.Colors;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -57,9 +58,10 @@ public class PlayerManager {
     }
 
     public void displayStats(CommandSender sender, BWPlayer player) {
-        Colors.message(sender, "&a=====[ &2&lPlayer Stats &a]=====");
+        Colors.message(sender, "&a=====[ &2&l" + Bukkit.getPlayer(player.getUuid()).getName() + "'s Stats &a]=====");
         Colors.message(sender, "&2Kills: &e" + player.getKills());
         Colors.message(sender, "&2Deaths: &e" + player.getDeaths());
+        Colors.message(sender, "&2Coins: &e" + player.getCoins());
     }
 
     public Map<UUID, BWPlayer> getLoadedPlayers() {

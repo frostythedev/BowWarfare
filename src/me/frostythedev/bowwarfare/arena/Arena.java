@@ -6,7 +6,10 @@ import me.frostythedev.bowwarfare.arena.enums.ArenaState;
 import me.frostythedev.bowwarfare.arena.enums.Placement;
 import me.frostythedev.bowwarfare.scoreboard.ScoreboardAPI;
 import me.frostythedev.bowwarfare.utils.Colors;
+import me.frostythedev.frostengine.bukkit.firework.InstantFirework;
 import org.bukkit.Bukkit;
+import org.bukkit.Color;
+import org.bukkit.FireworkEffect;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -180,9 +183,16 @@ public class Arena {
         }
         broadcast("&e-------------------------------");
 
-        for (Player ps : getPhysicalPlayers()) {
+       if(Config.GAME_FIREWORKS_ON_WIN){
+           FireworkEffect effect = FireworkEffect.builder().withColor(Color.GREEN)
+                   .withFade(Color.WHITE)
+                   .with(FireworkEffect.Type.BALL_LARGE)
+                   .trail(true)
+                   .build();
+           getSpawnpoints().forEach(l -> new InstantFirework(effect, l));
+       }
 
-            //TODO Fireworks
+        for (Player ps : getPhysicalPlayers()) {
             Colors.sendMessage(ps, "(&e-------------------------------");
             Colors.sendMessage(ps, "&c&lYour Stats: ");
             Colors.sendMessage(ps, "&cKills: " + getScore(ps.getUniqueId()));

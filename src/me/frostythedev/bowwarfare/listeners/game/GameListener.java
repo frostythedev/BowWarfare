@@ -30,7 +30,7 @@ public class GameListener implements Listener {
             event.setCancelled(true);
 
             BWPlayer bwPlayer = plugin.getPlayerManager().getPlayer(event.getPlayer());
-            String format = "&c[" + bwPlayer.getKills() + "&c] &b" + event.getPlayer().getName() + "&7» &f" + event.getMessage();
+            String format = "&c[" + bwPlayer.getKills() + "&c] &b" + event.getPlayer().getName() + " &7» &f" + event.getMessage();
             arena.broadcast(format);
         });
     }

@@ -16,15 +16,17 @@ public class CoinsCmd extends BWSubCmd {
     @Override
     public void run(CommandSender sender, String[] args) {
         if (sender instanceof Player) {
+            BWPlayer bwPlayer;
             if(args.length >= 2){
-                BWPlayer bwPlayer = getPlugin().getPlayerManager().getPlayer(Bukkit.getPlayer(args[1]));
-                if (bwPlayer == null) {
-                    Colors.message(sender, "&cCould not find coins for a player with the name '" + args[1] + "'");
-                } else {
-                    Colors.message(sender, "&e" + args[1] + " has &6" + bwPlayer.getCoins() + " &ecoins.");
-                }
+                 bwPlayer = getPlugin().getPlayerManager().getPlayer(Bukkit.getPlayer(args[1]));
             }else{
-                Colors.message(sender, "&cNot enough args.");
+                bwPlayer = getPlugin().getPlayerManager().getPlayer((Player) sender);
+            }
+
+            if (bwPlayer == null) {
+                Colors.message(sender, "&cCould not find coins for a player with that name.");
+            } else {
+                Colors.message(sender, "&e" + sender.getName() + " has &6" + bwPlayer.getCoins() + " &ecoins.");
             }
         }
     }
