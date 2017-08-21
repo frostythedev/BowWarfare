@@ -42,7 +42,11 @@ Coming Soon!
 None!
 
 ### Planned Features
+GAMEMODES
+- Develop more gamemode's TDM, CTF etc for future - POSTPONED
 
+SHOP
+- Developer a player shop so player's can buy new weapons like grenades etc - POSTPONED
 
 ### Contributors
 - XxLeetGamerxX - Original plugin
