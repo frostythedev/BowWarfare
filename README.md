@@ -35,6 +35,8 @@ If you'd like to know if this plugin works on your version of Craftbukkit/Spigot
 ### Development
 Currently the plugin is not something I plan on dedicating most of my time to therefore updates and new version released will be happening on a **bi-weekly** bases (every two weeks). So please be patient with requests and bugs. If it is something that negatively effects the core functionality of the plugin I will try my best to get to it as quickly as I can and release an update. If you'd like to fork the project and add features feel free to do so but support will **not** be given unless your source code is update to date with the current version of this project and is provided when asked.
 
+**Compiled builds will be released as soon as I can get around to making sure the current version of the plugin works with no errors.**
+
 ### API
 - Coming Soon!
 
