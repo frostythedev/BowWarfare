@@ -18,10 +18,10 @@ If you'd like to know if this plugin works on your version of Craftbukkit/Spigot
 | Command | Usage | Description | Permission |
 | ------ | ------ | ------ | ------ |
 | /bw | - | Shows the BowWarfare help page | - |
-| /bw create | **[name]** [min] [max] | Creates an arena with those properties | bw.arena.create |
-| /bw delete | **[name]** | Deletes an arena with that name | bw.arena.delete |
-| /bw addspawn | **[name]** | Adds a spawn to the arena with that name | bw.arena.addspawn |
-| /bw removespawn | **[name]** | Removes a spawn from an arena with that name | bw.arena.removespawn |
+| /bw create | **{name}** [min] [max] | Creates an arena with those properties | bw.arena.create |
+| /bw delete | **{name}** | Deletes an arena with that name | bw.arena.delete |
+| /bw addspawn | **{name}** | Adds a spawn to the arena with that name | bw.arena.addspawn |
+| /bw removespawn | **{name}** | Removes a spawn from an arena with that name | bw.arena.removespawn |
 | /bw stats | [player] | heck the stats of a player | bw.user.stats |
 | /bw coins | [player] | Check the coins of that player | bw.user.coins |
 | /bw setlobby | - | Sets the main lobby for all games | bw.admin.setlobby |
@@ -42,8 +42,6 @@ Currently the plugin is not something I plan on dedicating most of my time to th
 - None!
 
 ### Planned Features
-GAMEMODES
-
 | GameMode | Released |
 | ------ | ------ |
 | FFA | ✔ | 
@@ -60,5 +58,5 @@ SHOP
 - XxLeetGamerxX - Original plugin
 - TigerHix - ScoreboardLib which is currently built into the plugin
 
-### ChangeLog - 1.0.0
+### Updates - 1.0.0
 - Released source code
