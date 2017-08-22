@@ -57,8 +57,9 @@ SHOP
 - Coming Soon
 
 ### Contributors
-- XxLeetGamerxX - Original plugin
-- TigerHix - ScoreboardLib which is currently built into the plugin
+- XxLeetGamerxX - Original plugin - https://dev.bukkit.org/projects/bow-warfare
+- TechnicalBro - Commons Library - https://github.com/TechnicalBro/Commons
+- TigerHix - ScoreboardLib which is currently built into the plugin - https://github.com/TigerHix/ScoreboardLib
 
 ### Updates - 1.0.0
 - Released source code
