@@ -7,7 +7,7 @@ BowWarfare remastered by frostythedev is a minigame orginally created by XxLeetG
 ### Supported Builds
 If you'd like to know if this plugin works on your version of Craftbukkit/Spigot. Just have a look at the below table.
 
-| Version | Supported |
+| Version | Tested |
 | ------- | --------- |
 | 1.7 | ✘ |
 | 1.8 | ✔ |
